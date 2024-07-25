@@ -1,3 +1,8 @@
+##Things I added myself for matlab
+*.fig
+*.png
+*.asv
+
 ## Core latex/pdflatex auxiliary files:
 *.aux
 *.lof
