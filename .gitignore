@@ -1,6 +1,8 @@
 ##Things I added myself for matlab
 *.fig
 *.png
+*.tif
+*.tiff
 *.asv
 
 ## Core latex/pdflatex auxiliary files:
