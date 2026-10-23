@@ -10,7 +10,7 @@ h = 1/(N-1); %There are N gridpoints including the endpoints which are each
 T=30;
 
 %Temporal Mesh Size
-TN = 20;
+TN = 10;
 tau = 1/TN; %There are TN Temporal Gridpoints not including t=0 which are 
             %each tau apart
 
@@ -21,9 +21,9 @@ Omegax2 = X2*h.*(0:N-1);
 %Omega=meshgrid(Omegax1,Omegax2)
 
 %u0 = @(x1,x2) 1./(1+exp(-80.*(x1-0.5)));
-%u0=@(x1,x2) cos(2*pi.*x1).*sin(2*pi.*x2);
+u0=@(x1,x2) cos(2*pi.*x1).*sin(2*pi.*x2);
 %u0=@(x1,x2) cos(2*pi.*x1).*(x2.^2);
-u0=@(x1,x2) Bump(x1,x2,0.5,0.5,0.05,1);
+%u0=@(x1,x2) Bump(x1,x2,0.5,0.5,0.05,1);
 
 U0 = u0(OmegaX1,OmegaX2);
 figure
@@ -42,7 +42,7 @@ zlims = [-1,1];
 
 
 figure
-title('animation')
+%title('animation')
 u=U0;
 for i = 1:T*TN
     %compute derivative wrt time
@@ -57,11 +57,11 @@ for i = 1:T*TN
             K=Kernel(sqrt((x1-OmegaX1).^2+(x2-OmegaX2).^2),s);
             
             %D = DiffusionDifIntSurface(u,j,k);
-            %D = DifIntSurface(u,j,k,r);
+            D = DifIntSurface(u,j,k,r);
             %D = DifIntSurfaceCPT(u,j,k,r);
             %D = BackwardsDiffusionDifIntSurface(u,j,k);
             %D = BackwardsDifIntSurfaceBounded(u,j,k,r);
-            D = BackwardsDifIntSurfaceCPT(u,j,k,r);
+            %D = BackwardsDifIntSurfaceCPT(u,j,k,r);
 
             %c = sum(K.*D.*h^2,'all');
             %intfirst = trapz(K.*D);
@@ -80,6 +80,10 @@ for i = 1:T*TN
     ylim(x2lims);
     zlim(zlims);
     drawnow
+    title = "anticoordination";
+    filename = "test.gif";
+    %title(gca,title)
+    exportgraphics(gcf,filename,'Append',true)
 end
 
 

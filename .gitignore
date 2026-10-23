@@ -4,6 +4,7 @@
 *.tif
 *.tiff
 *.asv
+*.gif
 
 ## Core latex/pdflatex auxiliary files:
 *.aux
